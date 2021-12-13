@@ -4,80 +4,79 @@ from django.http.response import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 from account.forms import RegistraionStudentForm
 from account.models import Account
-from module_enseignant.forms import GroupeModelForm, ModuleModelForm, SeanceModelForm, TravailModelForm
+from module_enseignant.forms import GroupeModelForm, ModuleModelForm, SeanceModelForm
+from module_etudiant.forms import TravailRModelForm
 
-from module_enseignant.models import Groupe, Module, Seance, TravailR
+from module_enseignant.models import Groupe, Module, Seance, TravailE
+from module_enseignant.forms import TravailEModelForm
 
 
-
-######################################################## TravailR ##############################
-def list_travailR(request):
+######################################################## TravailE ##############################
+def list_TravailE(request):
    context = {}
    user = request.user
    if user.is_authenticated:
        if user.is_student == False:
             modules = Module.objects.filter(enseignant_id=user.id)
-            travailRendus = []
+            travailEnonces = []
             for module in modules:
-                print(module)
-                print(travailRendus)
-                travailRendus.extend(list(TravailR.objects.filter(module_id=module.id)))
-            return render(request, "travailR/listTravailR.html",{"travailRendus": travailRendus})
+                travailEnonces.extend(list(TravailE.objects.filter(module_id=module.id)))
+            return render(request, "TravailE/listTravailE.html",{"travailEnonces": travailEnonces})
        else:
            return JsonResponse("Vous n'avez pas d'accés sur cette page !!!!",safe=False)
    else:
        return render(request, "account/login_enseignant.html",{})
 
-def updateTravailR(request,pk):
+def updateTravailE(request,pk):
     user = request.user
     if user.is_authenticated:
         if user.is_student == False:
-            travailR = TravailR.objects.get(identifiant=pk)
-            form = TravailModelForm(instance=travailR)
+            travailE = TravailE.objects.get(identifiant=pk)
+            form = TravailRModelForm(instance=travailE)
             if request.method == 'POST':
-                form = TravailModelForm(request.POST, instance=travailR)
+                form = TravailRModelForm(request.POST, instance=travailE)
                 if form.is_valid():
                     if form.is_valid():
                         form.save()
-                        return redirect("/module_enseignant/travailR/listtravailR")
+                        return redirect("/module_enseignant/travailE/listtravailE")
             context = {'form':form}
-            return render(request, "travailR/addTravailR.html", context)
+            return render(request, "travailE/addTravailE.html", context)
         else:
             return JsonResponse("Vous n'avez pas d'accés sur cette page !!!!",safe=False)
     else:
         return render(request, "account/login_enseignant.html",{})
 
 
-def deleteTravailR(request,pk):
+def deletetravailE(request,pk):
     user = request.user
     if user.is_authenticated:
         if user.is_student == False:
-            travailR = TravailR.objects.get(identifiant=pk)
-            travailR.delete()
-            return redirect("/module_enseignant/travailR/listtravailR")
+            travailE = TravailE.objects.get(identifiant=pk)
+            travailE.delete()
+            return redirect("/module_enseignant/travailE/listtravailE")
         else:
             return JsonResponse("Vous n'avez pas d'accés sur cette page !!!!",safe=False)
     else:
         return render(request, "account/login_enseignant.html",{})
     
-def ajouter_travailR(request):
+def ajouter_travailE(request):
     user = request.user
     if user.is_authenticated:
         if user.is_student == False:
             if request.method == 'POST':
-                form = TravailModelForm(request.POST, request.FILES)
+                form = TravailEModelForm(request.POST, request.FILES)
                 if form.is_valid():
                     module = Module()
                     id_module = request.POST['inputNomModule']
                     module = Module.objects.get(id=id_module)
-                    travailR = form.save(commit=False)
-                    travailR.module = module
-                    travailR.save()
-                    return redirect("/module_enseignant/travailR/listtravailR")
+                    travailE = form.save(commit=False)
+                    travailE.module = module
+                    travailE.save()
+                    return redirect("/module_enseignant/travailE/listtravailE")
             else:
                 modules = Module.objects.filter(enseignant_id=user.id)
-                form=TravailModelForm()
-                return render(request, "travailR/addTravailR.html",{"form":form,"modules":modules})
+                form=TravailEModelForm()
+                return render(request, "travailE/addTravailE.html",{"form":form,"modules":modules})
         else:
             return JsonResponse("Vous n'avez pas d'accés sur cette page !!!!",safe=False)
     else:

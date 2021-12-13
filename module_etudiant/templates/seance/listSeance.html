@@ -1,5 +1,5 @@
 <!-- home.html -->
-{% extends "base.html" %} {% block content %}
+{% extends "base_etudiant.html" %} {% block content %}
 <div class="container col-md-12 col-auto" style="padding-top: 50px">
     <div class="form-row">
         <div class="form-group col-md-12">
@@ -13,7 +13,7 @@
                     <th scope="col">H début</th>
                     <th scope="col">H fin</th>
                     <th scope="col">N_Salle</th>
-                    <th scope="col">Etat</th>
+                    <th scope="col">Objectif</th>
                     <th scope="col">Module</th>
                     <th scope="col"></th>
                 </tr>
@@ -24,8 +24,8 @@
                     <td>{{s.heure_debut}}</td>
                     <td>{{s.heure_fin}}</td>
                     <td>{{s.numero_salle}}</td>
-                    <td>{{s.etat}}</td>
-                    <td>{{s.module.id}}</td>
+                    <td>{{s.objectif}}</td>
+                    <td>{{s.module.nom}}</td>
                     <td><a class="btn btn-sm btn-primary" href="{% url 'detail_seance' s.identifiant %}">detail</a></td>
                 </tr>
                 {% endfor %}

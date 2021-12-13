@@ -62,7 +62,7 @@ def login_enseignant(request):
 
 	user = request.user
 	if user.is_authenticated: 
-		return redirect("/module_enseignant/travailR/listtravailR")
+		return redirect("/module_enseignant/travailE/listtravailE")
 
 	if request.POST:
 		form = AccountAuthenticationForm(request.POST)
@@ -73,7 +73,7 @@ def login_enseignant(request):
 
 			if user:
 				login(request, user)
-				return redirect("/module_enseignant/travailR/listtravailR")
+				return redirect("/module_enseignant/travailE/listtravailE")
 
 	else:
 		form = AccountAuthenticationForm()
@@ -96,13 +96,7 @@ def login_view(request):
 
 	user = request.user
 	if user.is_authenticated: 
-		if user.is_student == True:
-			print("********** etudiant")
-		elif user.is_student == False:
-			print(("********* enseignant"))
-		else:
-			print("//////////////")
-		return redirect("/home")
+		return redirect("/module_etudiant/seances")
 
 	if request.POST:
 		form = AccountAuthenticationForm(request.POST)
@@ -113,17 +107,12 @@ def login_view(request):
 
 			if user:
 				login(request, user)
-				print("999")
-				print(user)
-				print(type(user))
-				return redirect("/home")
+				return redirect("/module_etudiant/seances")
 
 	else:
 		form = AccountAuthenticationForm()
 
 	context['login_form'] = form
-
-	# print(form)
 	return render(request, "account/login_etudiant.html", context)
 
 

@@ -1,22 +1,21 @@
 from django import forms
 from django.forms import fields
 
-from module_enseignant.models import Groupe, Module, Seance, TravailR
+from module_enseignant.models import Groupe, Module, Seance, TravailE
 
 
-class TravailModelForm(forms.ModelForm):
+class TravailEModelForm(forms.ModelForm):
     class Meta:
-        model = TravailR
-        fields = ('titre','date_lancement','date_retour','nature','descriptif','etat','evaluation','piece_jointe_enonce')
+        model = TravailE
+        fields = ('titre','date_lancement','date_retour','nature','descriptif','etat','piece_jointe_enonce')
         widgets = {
             'titre':forms.TextInput(attrs={'class':'form-control'}),
             'date_retour':forms.DateInput(attrs={'class':'form-control','type':'date'}),
             'nature':forms.TextInput(attrs={'class':'form-control'}),
             'descriptif':forms.TextInput(attrs={'class':'form-control'}),
             'etat':forms.TextInput(attrs={'class':'form-control'}),
-            'evaluation':forms.TextInput(attrs={'class':'form-control'}),
             'date_lancement':forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
-            'piece_jointe_enonce':forms.URLInput(attrs={'class':'form-control'})
+            'piece_jointe_enonce':forms.FileInput(attrs={'class':'form-control'})
         }
 
 class GroupeModelForm(forms.ModelForm):
@@ -56,3 +55,4 @@ class SeanceModelForm(forms.ModelForm):
             'type':forms.TextInput(attrs={'class':'form-control'}),
             'etat':forms.TextInput(attrs={'class':'form-control'}),
         }
+

@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'module_enseignant.apps.ModuleEnseignantConfig',
+    'module_etudiant.apps.ModuleEtudiantConfig',
     'account.apps.AccountConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -85,7 +86,7 @@ DATABASES = {
 
         'USER': 'postgres',
 
-        'PASSWORD': '12684757mM!',
+        'PASSWORD': '12684757m',
 
         'HOST': 'localhost',
 

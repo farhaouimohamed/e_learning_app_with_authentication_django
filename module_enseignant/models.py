@@ -16,17 +16,15 @@ class Module(models.Model):
     groupes=models.ManyToManyField(Groupe)
     enseignant=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 # Create your models here.
-class TravailR(models.Model):
+class TravailE(models.Model):
     identifiant=models.AutoField(primary_key=True,null=False)
     titre=models.CharField(max_length=255)
     date_lancement=models.DateField()
     date_retour=models.DateField()
     nature=models.CharField(max_length=255)
     descriptif=models.CharField(max_length=255)
-    piece_jointe_rendu=models.URLField(max_length = 255)
     piece_jointe_enonce=models.URLField(max_length = 255)
     etat=models.CharField(max_length=255)
-    evaluation=models.CharField(max_length=255)
     module=models.ForeignKey(Module,on_delete=models.CASCADE)
 
 class Seance(models.Model):
@@ -58,6 +56,11 @@ class Enregistrement(models.Model):
     date=models.DateField()
     seance=models.ForeignKey(Seance,on_delete=models.CASCADE)
 
-
-
-
+# Create your models here.
+class TravailR(models.Model):
+    identifiant=models.AutoField(primary_key=True,null=False)
+    piece_jointe_rendu=models.URLField(max_length = 255)
+    evaluation=models.CharField(max_length=255)
+    date=models.DateField(max_length=255)
+    travailE = models.ForeignKey(TravailE,on_delete=models.CASCADE)
+    etudiant=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

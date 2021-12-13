@@ -6,8 +6,8 @@
             <h1>Liste des travails à faire</h1>
         </div>
         <div class="form-group col-md-2">
-            <a class="button btn btn-primary" href="/module_enseignant/travailR/addtravailR">
-                Ajouter un travailR
+            <a class="button btn btn-primary" href="/module_enseignant/travailE/addtravailE">
+                Ajouter un travailE
             </a>
         </div>
     </div>
@@ -29,7 +29,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for t in travailRendus %}
+                {% for t in travailEnonces %}
                 <tr>
                     <td>{{ t.identifiant }}</td>
                     <td>{{ t.titre }}</td>
@@ -39,8 +39,8 @@
                     <td>{{ t.descriptif }}</td>
                     <td>{{ t.piece_jointe_enonce }}</td>
                     <td>{{ t.module.nom }}</td>
-                    <td><a class="btn btn-sm btn-info" href="{% url 'update_travailR' t.identifiant %}">Update</a></td>
-                    <td><a class="btn btn-sm btn-danger" href="{% url 'delete_travailR' t.identifiant %}">Delete</a></td>
+                    <td><a class="btn btn-sm btn-info" href="{% url 'update_travailE' t.identifiant %}">Update</a></td>
+                    <td><a class="btn btn-sm btn-danger" href="{% url 'delete_travailE' t.identifiant %}">Delete</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
