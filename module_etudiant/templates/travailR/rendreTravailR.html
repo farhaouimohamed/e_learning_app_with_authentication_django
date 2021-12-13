@@ -1,0 +1,23 @@
+<!-- home.html -->
+{% extends "base.html" %} {% block content %}
+<br>
+<div class="row" style="padding: 50px;">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <h1 style="text-align: center;">Rendre le travail</h1>
+        <div class="card card-body">
+            <p style="text-align: center;">Le titre de travailR est : </p>
+            {{travailR.titre}}
+            <hr>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <label for="inputGroupe" class="form-label"></label>
+                <input type="file" id="inputFileTravailR" name="inputFileTravailR" placeholder="upload file" />
+                <hr>
+                <input class="btn btn-success" type="submit" name="Confirm">
+            </form>
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+{% endblock content %}

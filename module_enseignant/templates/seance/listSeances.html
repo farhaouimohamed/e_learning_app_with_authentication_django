@@ -1,0 +1,46 @@
+<!-- home.html -->
+{% extends "base.html" %} {% block content %}
+<div class="container col-md-12 col-auto" style="padding-top: 50px">
+    <div class="form-row">
+        <div class="form-group col-md-10">
+            <h1>Liste des séances</h1>
+        </div>
+        <div class="form-group col-md-2">
+            <a class="button btn btn-primary" href="/module_enseignant/seances/addSeance">
+                Ajouter une séance
+            </a>
+        </div>
+    </div>
+    <div class="form-row">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Identifiant</th>
+                    <th scope="col">H début</th>
+                    <th scope="col">H fin</th>
+                    <th scope="col">N_Salle</th>
+                    <th scope="col">Etat</th>
+                    <th scope="col">Module</th>
+                    <th scope="col">Type</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for s in seances %}
+                <tr>
+                    <td>{{s.identifiant}}</td>
+                    <td>{{s.heure_debut}}</td>
+                    <td>{{s.heure_fin}}</td>
+                    <td>{{s.numero_salle}}</td>
+                    <td>{{s.etat}}</td>
+                    <td>{{s.module.id}}</td>
+                    <td>{{s.type}}</td>
+                    <td><a class="btn btn-sm btn-danger" href="{% url 'delete_seance' s.identifiant %}">delete</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,69 @@
+<!-- home.html -->
+{% extends "base.html" %} {% block content %}
+
+<div class="row">
+    <div class="col-sm-4">
+        <div class="card border-primary" style="max-width: 18rem;">
+            <div class="card-header">Enregistrement</div>
+            <div class="card-body text-primary">
+                <h5 class="card-title">{{enregistrement.nom}}</h5>
+                <p class="card-text">{{enregistrement.url}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="card border-primary" style="max-width: 18rem;">
+            <div class="card-header">Module</div>
+            <div class="card-body text-primary">
+                <h5 class="card-title">{{module.nom}</h5>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="card border-primary" style="max-width: 18rem;">
+            <div class="card-header">Enseignant</div>
+            <div class="card-body text-primary">
+                <h5 class="card-title">Nom & adresse mail</h5>
+                <p class="card-text">Nom : {{enseignant.nom}}</p>
+                <p class="card-text">Adresse mail : {{enseignant.email}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="card border-primary mb-12" style="max-width: 18rem;">
+        <div class="card-header">Travail à rendre</div>
+        <div class="card-body text-primary">
+            <h5 class="card-title">Consulter la liste des travaux à rendre</h5>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Titre</th>
+                        <th scope="col">Date lancement</th>
+                        <th scope="col">Date retour</th>
+                        <th scope="col">Nature</th>
+                        <th scope="col">Descriptif</th>
+                        <th scope="col">Pièce jointe enoncé</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for t in travailRendus %}
+                    <tr>
+                        <td>{{ t.titre }}</td>
+                        <td>{{ t.date_lancement }}</td>
+                        <td>{{ t.date_retour }}</td>
+                        <td>{{ t.nature }}</td>
+                        <td>{{ t.descriptif }}</td>
+                        <td>{{ t.piece_jointe_enonce }}</td>
+                        <td><a class="btn btn-sm btn-success" href="{% url 'rendre_travailR' t.identifiant %}">Rendre TravailR</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

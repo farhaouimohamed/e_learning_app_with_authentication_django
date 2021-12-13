@@ -1,0 +1,56 @@
+<!-- base.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>How to consume RESTful APIs with Django</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <!-- Container wrapper -->
+        <div class="container-fluid">
+            <!-- Toggle button -->
+            <a class="navbar-brand me-2" href="/home">
+                <h4>E-learning</h4>
+            </a>
+        </div>
+        <!-- Collapsible wrapper -->
+        <div class="d-flex align-items-center">
+            <a type="button" class="btn btn-light px-3 me-2" href="/enseignant/login">Login</a>
+        </div>
+    </nav>
+    <div class="container col-md-12 col-auto" style="padding-top: 50px">
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <h1 style="text-align: center;">Ajouter un enseignant</h1>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="padding-top: 20px; padding-bottom: 30px;">
+
+        <div class="col-md-12 col-auto">
+
+            <form method="post" action="" enctype="multipart/form-data">
+                {% csrf_token %} {{form.as_p}}
+                <button type="submit" class="btn btn-success">Créer votre compte (enseignant)</button>
+            </form>
+        </div>
+    </div>
+    <footer class="bg-light text-center text-lg-start">
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2021 Copyright:
+            <a class="text-dark" href="#">E_learning</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+
+</body>
+
+</html>

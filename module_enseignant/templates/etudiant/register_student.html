@@ -1,0 +1,41 @@
+<!-- home.html -->
+{% extends "base.html" %} {% block content %}
+<div class="container col-md-12 col-auto" style="padding-top: 50px">
+    <div class="form-row">
+        <div class="form-group col-md-8">
+            <h1>Ajouter un étudiant</h1>
+        </div>
+        <div class="form-group col-md-2">
+            <a class="button btn btn-primary" href="/module_enseignant/etudiants/">
+              Liste étudiants
+          </a>
+        </div>
+        <div class="form-group col-md-2">
+            <a class="button btn btn-primary" href="/module_enseignant/groupe/listGroupe">
+              Liste groupes
+          </a>
+        </div>
+    </div>
+</div>
+<div class="container" style="padding-top: 20px; padding-bottom: 30px;">
+
+    <div class="col-md-12 col-auto">
+
+        <form method="post" action="" enctype="multipart/form-data">
+            {% csrf_token %} {{form.as_p}}
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="inputGroupe" class="form-label">Nom du Groupe</label>
+                    <select id="inputNomGroupe" name="inputNomGroupe" class="form-control">
+                      <option selected disabled>Choose...</option>
+                      {% for groupe in groupes %}
+                        <option value='{{groupe.identifiant}}'>{{groupe.nom}}</option>  
+                      {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">Créer un compte étudiant</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}

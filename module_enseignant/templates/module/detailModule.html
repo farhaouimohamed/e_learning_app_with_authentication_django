@@ -1,0 +1,116 @@
+<!-- home.html -->
+{% extends "base.html" %} {% block content %}
+<div class="container col-md-12 col-auto" style="padding-top: 50px">
+    <div class="form-row">
+        <div class="form-group col-md-10">
+            <h1>Détail Module</h1>
+        </div>
+        <div class="form-group col-md-2">
+            <a class="button btn btn-primary" href="/module_enseignant/module/listModule">
+                Liste modules
+            </a>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="main-body">
+
+        <div class="row gutters-sm">
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center">
+                            <div class="mt-3">
+                                <h4>{{module.nom}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">identifiant</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{module.id}}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Nom</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{module.nom}}
+                            </div>
+                        </div>
+                        <hr>
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Nombre heures totale</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{module.nbr_heures_totale}}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Type</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{module.type}}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Niveau</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{module.niveau}}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Liste Groupe</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <div class="form-row">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Nom groupe</th>
+                                                <th scope="col">Nombre étudiants</th>
+                                                <th scope="col">Amil groupe</th>
+                                                <th scope="col">Niveau d'étude</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for g in groupes %}
+                                            <tr>
+                                                <td>{{g.nom}}</td>
+                                                <td>{{g.nbr_etudiants}}</td>
+                                                <td>{{g.amil_groupe}}</td>
+                                                <td>{{g.niveau_etude}}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock content %}

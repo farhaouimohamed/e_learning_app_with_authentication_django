@@ -1,0 +1,25 @@
+<!-- home.html -->
+{% extends "base.html" %} {% block content %}
+<div class="container col-md-12 col-auto" style="padding-top: 50px">
+    <div class="form-row">
+        <div class="form-group col-md-10">
+            <h1>Ajouter un module</h1>
+        </div>
+        <div class="form-group col-md-2">
+            <a class="button btn btn-primary" href="/module_enseignant/module/listModule">
+              Liste modules
+          </a>
+        </div>
+    </div>
+</div>
+<div class="container">
+
+    <div class="col-md-12 col-auto">
+        <form method="post" action="" enctype="multipart/form-data" style="padding-bottom: 150px;">
+            {% csrf_token %} {{moduleForm.as_p}}
+            <button type="submit" class="btn btn-success">Créer un module</button>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

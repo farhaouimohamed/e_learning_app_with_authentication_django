@@ -1,0 +1,47 @@
+<!-- home.html -->
+{% extends "base.html" %} {% block content %}
+<div class="container col-md-12 col-auto" style="padding-top: 50px">
+    <div class="form-row">
+        <div class="form-group col-md-8">
+            <h1>Ajouter un groupe</h1>
+        </div>
+        <div class="form-group col-md-2">
+            <a class="button btn btn-primary" href="/module_enseignant/etudiants/">
+                Liste étudiants
+            </a>
+        </div>
+        <div class="form-group col-md-2">
+            <a class="button btn btn-primary" href="/module_enseignant/groupe/listGroupe">
+                Liste groupes
+            </a>
+        </div>
+    </div>
+</div>
+<div class="container" style="padding-top: 70px; padding-bottom: 100px;">
+
+    <div class="col-md-12 col-auto">
+
+        <form method="post" action="">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputNom">Nom</label>{{groupeForm.nom}}
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputNbr">Nombre étudiants</label>{{groupeForm.nbr_etudiants}}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputAmil">Amil groupe</label>{{groupeForm.amil_groupe}}
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputNiveau">Niveau d'études</label>{{groupeForm.niveau_etude}}
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">Créer un groupe</button>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}
