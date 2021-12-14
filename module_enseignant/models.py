@@ -45,7 +45,6 @@ class Absence(models.Model):
     justificatif=models.CharField(max_length=255)
     etudiant=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     seance=models.ForeignKey(Seance,on_delete=models.CASCADE)
-
 class Enregistrement(models.Model):
     identifiant=models.AutoField(primary_key=True,null=False)
     nom=models.CharField(max_length=255, unique=True)

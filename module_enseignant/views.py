@@ -7,9 +7,10 @@ from account.models import Account
 from module_enseignant.forms import GroupeModelForm, ModuleModelForm, SeanceModelForm
 from module_etudiant.forms import TravailRModelForm
 
-from module_enseignant.models import Groupe, Module, Seance, TravailE
+from module_enseignant.models import Absence, Groupe, Module, Seance, TravailE
 from module_enseignant.forms import TravailEModelForm
-
+from datetime import datetime
+  
 
 ######################################################## TravailE ##############################
 def list_TravailE(request):
@@ -292,6 +293,38 @@ def list_seances(request):
             return JsonResponse("Vous n'avez pas d'accés sur cette page !!!!",safe=False)
     else:
         return render(request, "account/login_enseignant.html",{})
+
+def detail__seance(request,pk):
+    user = request.user
+    if user.is_authenticated:
+        if user.is_student == False:
+            seance = Seance.objects.get(identifiant=pk)
+            absences = seance.absence_set.all()
+            return render(request, "seance/detailSeance.html",{"absences":absences,"seance":seance})
+        else:
+            return JsonResponse("Vous n'avez pas d'accés sur cette page !!!!",safe=False)
+    else:
+        return render(request, "account/login_enseignant.html",{})
+    
+def update_motif(request,pk):
+    user = request.user
+    if user.is_authenticated:
+        if user.is_student == False:
+            absence = Absence.objects.get(identifiant=pk)
+            etudiant = Account.objects.get(id=absence.etudiant_id)
+            if request.method == 'POST':
+                motif = request.POST['inputMotif']
+                justificatif = request.POST['inputJustificatif']
+                absence.motif = motif
+                absence.justificatif = justificatif
+                absence.save()
+                return redirect("/module_enseignant/seances")
+            context = {'absence':absence,'etudiant':etudiant}
+            return render(request, "seance/update_motif.html",context)
+        else:
+            return JsonResponse("Vous n'avez pas d'accés sur cette page !!!!",safe=False)
+    else:
+        return render(request, "account/login_enseignant.html",{})
    
 def addSeance(request):
     user = request.user
@@ -302,10 +335,17 @@ def addSeance(request):
                 if form.is_valid():
                     id_module = request.POST.get('inputNomModule')
                     module = Module.objects.get(id=id_module)
+                    groupes = module.groupes.all()
+                    etudiants = []
+                    for groupe in groupes:
+                        etudiants.extend(list(Account.objects.filter(groupe_id=groupe.identifiant)))
                     seance = Seance()
                     seance = form.save(commit=False)
                     seance.module = module
                     seance.save()
+                    for etudiant in etudiants:
+                        absence = Absence(date=datetime.now(),motif="absent",seance=seance,etudiant=etudiant)
+                        absence.save()
                 return redirect("/module_enseignant/seances")
             else:
                 modules = Module.objects.filter(enseignant_id=user.id)

@@ -26,5 +26,7 @@ urlpatterns = [
     path('seances/', views.list_seances, name='liste_seances'),
     path('seances/addSeance', views.addSeance, name='add_seance'),
     path('delete_seance/<str:pk>/', views.deleteSeance, name='delete_seance'),
+    path('detail__seance/<str:pk>/', views.detail__seance, name='detail__seance'),
+    path('update_motif/<str:pk>/', views.update_motif, name='update_motif'),
 ]
 

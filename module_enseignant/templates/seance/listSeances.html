@@ -23,6 +23,7 @@
                     <th scope="col">Module</th>
                     <th scope="col">Type</th>
                     <th scope="col"></th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -35,7 +36,9 @@
                     <td>{{s.etat}}</td>
                     <td>{{s.module.id}}</td>
                     <td>{{s.type}}</td>
-                    <td><a class="btn btn-sm btn-danger" href="{% url 'delete_seance' s.identifiant %}">delete</a></td>
+                    <td><a class="btn btn-sm btn-danger" href="{% url 'delete_seance' s.identifiant %}">Delete</a></td>
+                    <td><a class="btn btn-sm btn-info" href="{% url 'detail__seance' s.identifiant %}">Détails</a></td>
+
                 </tr>
                 {% endfor %}
             </tbody>
