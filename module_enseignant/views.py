@@ -7,7 +7,7 @@ from account.models import Account
 from module_enseignant.forms import GroupeModelForm, ModuleModelForm, SeanceModelForm
 from module_etudiant.forms import TravailRModelForm
 
-from module_enseignant.models import Absence, Groupe, Module, Seance, TravailE
+from module_enseignant.models import Absence, Groupe, Module, Seance, TravailE, TravailR
 from module_enseignant.forms import TravailEModelForm
 from datetime import datetime
   
@@ -73,6 +73,7 @@ def ajouter_travailE(request):
                     travailE = form.save(commit=False)
                     travailE.module = module
                     travailE.save()
+                    add_init_travailR(id_module,travailE)
                     return redirect("/module_enseignant/travailE/listtravailE")
             else:
                 modules = Module.objects.filter(enseignant_id=user.id)
@@ -82,6 +83,20 @@ def ajouter_travailE(request):
             return JsonResponse("Vous n'avez pas d'accés sur cette page !!!!",safe=False)
     else:
         return render(request, "account/login_enseignant.html",{})
+
+def add_init_travailR(module_id,travailE):
+    module = Module.objects.get(id=module_id)
+    groupes = module.groupes.all()
+    etudiants = []
+    for groupe in groupes:
+        etudiants.extend(list(Account.objects.filter(groupe_id=groupe.identifiant)))
+    for etudiant in etudiants:
+        travailR = TravailR()
+        travailR.etudiant = etudiant
+        travailR.travailE = travailE
+        travailR.save()
+
+
 
 #####################################################################################################
 
@@ -110,7 +125,7 @@ def register_student(request):
                 context = {'form':form, 'groupes':groupes}
                 return render(request, 'etudiant/register_student.html', context)
             if request.method == 'POST':
-                form = RegistraionStudentForm(request.POST)
+                form = RegistraionStudentForm(request.POST, request.FILES)
                 if form.is_valid():
                     id_groupe = request.POST['inputNomGroupe']
                     groupe = Groupe.objects.get(identifiant=id_groupe)

@@ -1,5 +1,5 @@
 <!-- home.html -->
-{% extends "base.html" %} {% block content %}
+{% extends "base_etudiant.html" %} {% block content %}
 <br>
 <div class="row" style="padding: 50px;">
     <div class="col-md-3"></div>
@@ -9,10 +9,9 @@
             <p style="text-align: center;">Le titre de travailR est : </p>
             {{travailR.titre}}
             <hr>
-            <form action="" method="POST">
+            <form action="" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-                <label for="inputGroupe" class="form-label"></label>
-                <input type="file" id="inputFileTravailR" name="inputFileTravailR" placeholder="upload file" />
+                {{form.as_p}}
                 <hr>
                 <input class="btn btn-success" type="submit" name="Confirm">
             </form>

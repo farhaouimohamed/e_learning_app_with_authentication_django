@@ -1,0 +1,72 @@
+<!-- home.html -->
+{% extends "base_etudiant.html" %} {% block content %}
+<div class="container" style="padding-top: 50px; padding-bottom: 50px;">
+    <h1>Détail séance; objectif : "{{seance.objectif}}"</h1>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card border-success">
+                <div class="card-header">Enregistrement</div>
+                <div class="card-body text-info">
+                    <h5 class="card-title">{{enregistrement.nom}}</h5>
+                    <p class="card-text">{{enregistrement.url}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card border-success">
+                <div class="card-header">Module</div>
+                <div class="card-body text-info">
+                    <p class="card-title">Nom : {{module.nom}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card border-success">
+                <div class="card-header">Enseignant</div>
+                <div class="card-body text-primary">
+                    <p class="card-text">Nom : {{enseignant.nom}}</p>
+                    <p class="card-text">Adresse mail : {{enseignant.email}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="card border-success col-sm-12">
+            <div class="card-header">Travail à rendre</div>
+            <div class="card-body text-info">
+                <h5 class="card-title">Consulter la liste des travaux à rendre</h5>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Titre</th>
+                            <th scope="col">Date lancement</th>
+                            <th scope="col">Date retour</th>
+                            <th scope="col">Nature</th>
+                            <th scope="col">Descriptif</th>
+                            <th scope="col">Pièce jointe enoncé</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for t in travauxEnonces %}
+                        <tr>
+                            <td>{{ t.titre }}</td>
+                            <td>{{ t.date_lancement }}</td>
+                            <td>{{ t.date_retour }}</td>
+                            <td>{{ t.nature }}</td>
+                            <td>{{ t.descriptif }}</td>
+                            <td><a href="/media/{{ t.piece_jointe_enonce }}">{{ t.piece_jointe_enonce }}</a></td>
+                            <td><a class="btn btn-sm btn-success" href="{% url 'rendre_travail' t.identifiant %}">Rendre TravailR</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

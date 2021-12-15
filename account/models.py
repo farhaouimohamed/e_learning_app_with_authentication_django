@@ -44,7 +44,7 @@ class Account(AbstractBaseUser):
     nbr_heures_totale=models.IntegerField(null=True,blank=True)
     date_joined=models.DateTimeField(verbose_name='date joined', auto_now_add=True)
     last_login=models.DateTimeField(verbose_name='last login', auto_now=True)
-    photo=models.FileField(null=True, blank=True)
+    photo=models.ImageField(null=True, blank=True)
     date_naissance=models.DateField(null=True, blank=True)
     etat=models.CharField(max_length=255, null=True, blank=True)
     situation=models.CharField(max_length=255, null=True, blank=True)

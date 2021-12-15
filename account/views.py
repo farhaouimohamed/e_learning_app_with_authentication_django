@@ -107,7 +107,7 @@ def login_view(request):
 
 			if user:
 				login(request, user)
-				return redirect("/module_etudiant/seances")
+				return redirect("/module_etudiant/profil")
 
 	else:
 		form = AccountAuthenticationForm()

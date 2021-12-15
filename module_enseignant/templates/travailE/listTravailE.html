@@ -24,7 +24,6 @@
                     <th scope="col">Pièce jointe enoncé</th>
                     <th scope="col">Module</th>
                     <th scope="col"></th>
-                    <th scope="col"></th>
 
                 </tr>
             </thead>
@@ -37,9 +36,8 @@
                     <td>{{ t.date_retour }}</td>
                     <td>{{ t.nature }}</td>
                     <td>{{ t.descriptif }}</td>
-                    <td>{{ t.piece_jointe_enonce }}</td>
+                    <td><a href="/media/{{t.piece_jointe_enonce}}" >{{ t.piece_jointe_enonce }}</a></td>
                     <td>{{ t.module.nom }}</td>
-                    <td><a class="btn btn-sm btn-info" href="{% url 'update_travailE' t.identifiant %}">Update</a></td>
                     <td><a class="btn btn-sm btn-danger" href="{% url 'delete_travailE' t.identifiant %}">Delete</a></td>
                 </tr>
                 {% endfor %}

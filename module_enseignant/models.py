@@ -23,7 +23,7 @@ class TravailE(models.Model):
     date_retour=models.DateField()
     nature=models.CharField(max_length=255)
     descriptif=models.CharField(max_length=255)
-    piece_jointe_enonce=models.URLField(max_length = 255)
+    piece_jointe_enonce=models.FileField(upload_to ='travailE/',max_length = 255)
     etat=models.CharField(max_length=255)
     module=models.ForeignKey(Module,on_delete=models.CASCADE)
 
@@ -58,8 +58,9 @@ class Enregistrement(models.Model):
 # Create your models here.
 class TravailR(models.Model):
     identifiant=models.AutoField(primary_key=True,null=False)
-    piece_jointe_rendu=models.URLField(max_length = 255)
+    piece_jointe_rendu=models.FileField(upload_to ='travailR/',max_length = 255)
+    is_terminated = models.BooleanField(default=False)
     evaluation=models.CharField(max_length=255)
-    date=models.DateField(max_length=255)
+    date=models.DateField(null=True,blank=True)
     travailE = models.ForeignKey(TravailE,on_delete=models.CASCADE)
     etudiant=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
